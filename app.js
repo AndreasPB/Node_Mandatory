@@ -25,7 +25,7 @@ let apiObject = require(__dirname + '/static/json/data.json');
 
 // Get
 app.get('/api/data', (req, res) => {
-    res.send(apiObject);
+    res.sendFile(__dirname + '/static/json/data.json' );
 });
 
 app.get('/api/data/:id', (req, res) => {
