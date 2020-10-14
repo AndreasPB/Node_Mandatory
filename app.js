@@ -5,6 +5,7 @@ const path = require('path');
 const { func } = require('joi');
 const router = express.Router();
 const http = require('http');
+const port = process.env.PORT; // 8080 eller process.env.PORT
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -20,7 +21,7 @@ app.get("/api", (req, res) => {
     return res.sendFile(__dirname + '/api.html');
 });
 
-let apiObject = require('.static/json/data.json');
+let apiObject = require(__dirname + '/static/json/data.json');
 
 // Get
 app.get('/api/data', (req, res) => {
@@ -105,12 +106,9 @@ app.get("/greeting", (req, res) => {
 });
 
 
-// module.exports = app;
-
-
-app.listen(process.env.PORT, (error) => {
+app.listen(port, (error) => {
     if (error) {
         console.log("Error starting the server");
     }
-    console.log("Server is running on port", process.env.PORT);
+    console.log("Server is running on port", port);
 });
