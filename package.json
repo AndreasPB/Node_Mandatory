@@ -1,0 +1,16 @@
+{
+  "description": "Mandatory for nodejs",
+  "main": "app.js",
+  "scripts": {
+    "start-dev": "cross-env PORT=8080 nodemon app.js",
+    "start-prod": "node app.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cross-env": "^7.0.2",
+    "express": "^4.17.1",
+    "joi": "^17.2.1",
+    "nodemon": "^2.0.4"
+  }
+}

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?skin=default"></script>
+    <link rel="stylesheet" href="static/css/prettify.css">
+    <link rel="stylesheet" href="static/css/style.css">
+    <title>API</title>
+</head>
+<body>
+    <div class="container">
+        <div id="header">
+            <!-- Navbar -->
+        </div>
+            
+        <h1>API</h1>
+        <p>
+            Min API side tager brug af AJAX og jQuery. 
+            Ud over det bruger jeg en JSON, der ligger på <a href ="/api/data">/api/data</a>  
+        </p>
+        <p>
+            Vælg et antal kolonner og søg
+        </p>
+
+        <label for="columns_dropdown">Select columns</label>
+        <select id="columns_dropdown">
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="25">25</option>
+            <option value="50">50</option>
+            <option value="9999">all</option>
+        </select>
+        
+        <button type="button" class="btn btn-primary btn-sm" id="columns_button">Search</button>
+        <button type="button" class="button btn btn-secondary btn-sm" id="clear_button">Clear</button>
+
+
+
+        <table id="data_table" class="table">
+            <thead class="thead-light">
+                <th>ID</th>
+                <th>Firstname</th>
+                <th>Lastname</th>
+                <th>Email</th>        
+            </thead>
+            <tbody></tbody>
+        </table>
+
+        <hr>
+        <h2>Dokumentation</h2>
+
+        <!-- Node/Express -->
+        <div class="row">
+            <div class="col">
+                <h3>Node/Express</h3>
+                <pre id="prettyNode" class="prettyprint lang-js linenums">
+// API
+app.get("/api", (req, res) => {
+    return res.sendFile(__dirname + '/api.html');
+});
+let apiObject = require('./data.json');
+// Get
+app.get('/api/data', (req, res) => {
+    res.send(apiObject);
+});</pre>
+
+                <p>Node/Express gør os i stand til hurtigt at opsætte en side.</p>
+                <p>Li 2-3: Node bliver brugt til at binde html-filen til "/api".</p>
+                <p>Li 5:   Min JSON-fil bliver lagt over i et JS objekt.</p>
+                <p>Li 7-8: JS objektet bliver bundet til adressen "/api/data".</p>
+            </div>
+        </div>
+
+        <!-- jQuery -->
+        <div class="row">
+            <div class="col">
+                <h3>jQuery</h3>
+                <pre id="prettyjQuery" class="prettyprint lang-js linenums">
+$(document).ready( () => {
+    $('#clear_button').click( () => $('#data_table tbody tr').remove());
+    $('#columns_button').click( () => {
+        $('#data_table tbody tr').remove();
+        let tableColumns = $('#columns_dropdown').val();</pre> 
+
+                <p>jQuery venter på at dokumentet er klar, derefter reagerer den på knappe-klik.</p>
+                <p>Li 2:   Sletter alt fra tbody i mit data_table table.</p>
+                <p>Li 3-5: Samme som før + tager i mod en værdi fra dropdown menuen.</p>
+            </div>
+        </div>
+
+
+        <!-- Node/Express -->
+        <div class="row">
+            <div class="col">
+                <h3>Ajax</h3>
+                <pre id="prettyAjax" class="prettyprint lang-js linenums">
+$.ajax({
+    type: "GET",
+    url: "http://localhost:8080/api/data",
+    dataType: "json",
+    success: function (response, status, xhr) {
+        $.each(response, function(i, data) {
+            if (i >= tableColumns) return false;
+            let $tr = $('<tr>').append(
+            $('<td>').text(data.id),
+            $('<td>').text(data.first_name),
+            $('<td>').text(data.last_name),
+            $('<td>').text(data.email),
+            ).appendTo('#data_table', 'tbody');</pre>
+
+                <p>Ajax lavet en Get-request og bruger jQuery til at løbe alle elementerne igennem og danne HTML-kode</p>
+                <p>Koden bliver appended til tabellens tbody indtil tællerneren rammer tableColumns</p>
+            </div>
+            
+        </div>
+    
+    </div>
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <script src="static/script.js"></script>
+    <script>
+        $(document).ready( () => {
+            //$('#prettyjQuery').load('/static/code_examples/jQueryCode.js');
+            //$('#prettyNode').load('/static/code_examples/nodeCode.js');
+            // $('#prettyAjax').load('/static/code_examples/AjaxCode.js');
+
+            $('#clear_button').click( () => $('#data_table tbody tr').remove());
+
+            $('#columns_button').click( () => {
+                $('#data_table tbody tr').remove();
+                let tableColumns = $('#columns_dropdown').val();
+
+                $.ajax({
+                    type: "GET",
+                    url: "http://localhost:8080/api/data",
+                    dataType: "json",
+                    success: function (response, status, xhr) {
+                        $.each(response, function(i, data) {
+                            if (i >= tableColumns) return false;                                 
+                            let $tr = $('<tr>').append(
+                            $('<td>').text(data.id),
+                            $('<td>').text(data.first_name),
+                            $('<td>').text(data.last_name),
+                            $('<td>').text(data.email),
+                            ).appendTo('#data_table', 'tbody');
+                                                       
+                        });                    
+                    } 
+                })
+
+            })
+
+        });
+    </script>
+</body>
+</html>
