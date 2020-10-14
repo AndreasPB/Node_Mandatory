@@ -13,12 +13,12 @@ app.use("/static", express.static('./static/'));
 
 // Homepage
 app.get("/", (req, res) => {
-    return res.sendFile(__dirname + '/index.html');
+    return res.sendFile(__dirname + '/static/html/index.html');
 });
 
 // API
 app.get("/api", (req, res) => {
-    return res.sendFile(__dirname + '/api.html');
+    return res.sendFile(__dirname + '/static/html/api.html');
 });
 
 let apiObject = require(__dirname + '/static/json/data.json');
@@ -41,7 +41,7 @@ app.get('/api/data/:id', (req, res) => {
 
 // Setup
 app.get('/setup', (req, res) => {
-    res.sendFile(__dirname + '/setup.html');
+    res.sendFile(__dirname + '/static/html/setup.html');
 })
 
 app.post('/api/data', (req, res) => {
