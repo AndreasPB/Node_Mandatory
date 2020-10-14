@@ -112,9 +112,9 @@ app.get("/greeting", (req, res) => {
 // module.exports = app;
 
 
-app.listen(8080, (error) => {
+app.listen(process.env.PORT, (error) => {
     if (error) {
         console.log("Error starting the server");
     }
-    console.log("Server is running on port", 8080);
+    console.log("Server is running on port", process.env.PORT);
 });
