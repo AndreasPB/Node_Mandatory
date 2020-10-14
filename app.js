@@ -1,10 +1,10 @@
-// const Joi = require('joi');
+// const Joi = require('joi'); // Brug senere til post, put, patch validering
 const express = require('express');
 let app = express();
 const path = require('path');
 const { func } = require('joi');
 const router = express.Router();
-const http = require('http');
+const http = require('http'); // ? er vel erstattet af Express
 const port = process.env.PORT; // 8080 eller process.env.PORT
 
 app.use(express.urlencoded({ extended: true }));
@@ -25,7 +25,7 @@ let apiObject = require(__dirname + '/static/json/data.json');
 
 // Get
 app.get('/api/data', (req, res) => {
-    res.sendFile(__dirname + '/static/json/data.json' );
+    res.sendFile(__dirname + '/static/json/data.json');
 });
 
 app.get('/api/data/:id', (req, res) => {

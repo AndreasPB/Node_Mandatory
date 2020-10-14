@@ -101,17 +101,20 @@ $(document).ready( () => {
                 <pre id="prettyAjax" class="prettyprint lang-js linenums">
 $.ajax({
     type: "GET",
-    url: "http://localhost:8080/api/data",
+    url: "https://nodejsdocu.herokuapp.com/api/data",
     dataType: "json",
     success: function (response, status, xhr) {
         $.each(response, function(i, data) {
-            if (i >= tableColumns) return false;
+            if (i >= tableColumns) return false;                                 
             let $tr = $('<tr>').append(
             $('<td>').text(data.id),
             $('<td>').text(data.first_name),
             $('<td>').text(data.last_name),
             $('<td>').text(data.email),
-            ).appendTo('#data_table', 'tbody');</pre>
+            ).appendTo('#data_table', 'tbody');
+        });                    
+    } 
+})</pre>
 
                 <p>Ajax lavet en Get-request og bruger jQuery til at løbe alle elementerne igennem og danne HTML-kode</p>
                 <p>Koden bliver appended til tabellens tbody indtil tællerneren rammer tableColumns</p>
@@ -140,7 +143,7 @@ $.ajax({
 
                 $.ajax({
                     type: "GET",
-                    url: "http://localhost:8080/api/data",
+                    url: "https://nodejsdocu.herokuapp.com/api/data",
                     dataType: "json",
                     success: function (response, status, xhr) {
                         $.each(response, function(i, data) {
@@ -151,7 +154,6 @@ $.ajax({
                             $('<td>').text(data.last_name),
                             $('<td>').text(data.email),
                             ).appendTo('#data_table', 'tbody');
-                                                       
                         });                    
                     } 
                 })
