@@ -20,7 +20,7 @@ app.get("/api", (req, res) => {
     return res.sendFile(__dirname + '/api.html');
 });
 
-let apiObject = require('./data.json');
+let apiObject = require('.static/json/data.json');
 
 // Get
 app.get('/api/data', (req, res) => {
@@ -75,16 +75,11 @@ app.put('/api/data/:id', (req, res) => {
     
     // Update course
 
-    apiObject
-.first_name = req.body.first_name,
-    apiObject
-.last_name = req.body.last_name,
-    apiObject
-.email = req.body.email,
-    apiObject
-.gender = req.body.gender,
-    apiObject
-.ip_address = req.body.ip_address
+    apiObject.first_name = req.body.first_name,
+    apiObject.last_name = req.body.last_name,
+    apiObject.email = req.body.email,
+    apiObject.gender = req.body.gender,
+    apiObject.ip_address = req.body.ip_address
     // Return the updated course
     res.send(apiObject
     );
