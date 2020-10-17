@@ -10,13 +10,11 @@
     <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?skin=default"></script>
     <link rel="stylesheet" href="static/css/prettify.css">
     <link rel="stylesheet" href="static/css/style.css">
-    <title>Setup</title>
+    <title>Extra</title>
 </head>
 <body>
-    
     <div class="container">
         <div id="header">
-            <!-- Navbar -->
             <nav id="navbar" class="navbar navbar-expand-lg navbar-light bg-light">
                 <a class="navbar-brand" href="#">Mandatory</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -31,48 +29,27 @@
                         <a class="nav-link" href="/api">API</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="/setup">Setup</a>
+                        <a class="nav-link" href="/setup">Setup</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" href="/extra">Extra</a>
+                      <a class="nav-link active" href="/extra">Extra</a>
                   </li>
                 </ul>
             </nav>
         </div>
-        <h1>Oversigt over nodejs opsætning mm.</h1>
 
-        <h3>Package</h3>
+        <h1>Extra</h1>
+        <p>Her er lidt ekstra ting jeg har set på i løbet af semesteret</p>
+
+        <h3>Heroku</h3>
+        <p>Jeg valgte Heroku fordi det er en gratis løsning der virker med Node.</p>
+        <p><b>Opsætning:</b></p>
+        <p>Heroku leder et et script i package.json der hedder "start", tilføjede "start": "node app.js."</p>
+        <p>For at håndterer porten, nu hvor vi ikke kører på localhost, tilføjer jeg "process.env.PORT" til min port, 
+            som min app.listen bruger.</p>
+
         <pre id="prettyNode" class="prettyprint lang-js linenums">
-{
-    "description": "Mandatory for nodejs",
-    "main": "app.js",
-    "scripts": {
-        "start-dev": "cross-env PORT=8080 nodemon app.js",
-        "start": "node app.js"
-    },
-    "author": "",
-    "license": "ISC",
-    "dependencies": {
-        "cross-env": "^7.0.2",
-        "express": "^4.17.1",
-        "joi": "^17.2.1",
-        "nodemon": "^2.0.4"
-    }
-}</pre>
-        <p>Package er en JSON der gør os i stand til sætte Node op lyn-hurtigt på et nyt system. 'npm install' henter alt der er beskrevet under dependencies</p>
-        <p>En anden styrke er at vi bliver i stand til at starte serveren med forskellige scripts. Dette gør os i stand til at have et udviklings og prokuktions script.</p>
-        <h2>Modules</h2>
-
-        <h3>Express</h3>
-        <p>Beskrevet som et hurtigt og minimalistisk framework, som gør det langt hurtigere at sætte Node servere op.</p>
-        <pre id="prettyNode" class="prettyprint lang-js linenums">
-const express = require('express');
-const app = express();
-
-// Homepage
-app.get("/", (req, res) => {
-    return res.sendFile(__dirname + '/static/html/index.html');
-});
+const port = process.env.PORT || 8080; 
 
 app.listen(port, (error) => {
     if (error) {
@@ -80,13 +57,15 @@ app.listen(port, (error) => {
     }
     console.log("Server is running on port", port);
 });</pre>
-        <p>Modulet har bl.a. funktion 'get', som gør det nemt at binde tekst, filer mm. til en url.</p>
 
-        <h3>Nodemon</h3>
-        <p>For at slippe for at konstant skrive "node .\app.js" har vi nodemon, som automatisk genstarter hver gang der er en ændring</p>
-        <p>Hentes med 'npm install nodemon' og startes med "nodemon .\app.js".</p>
+        <p>Man kan bruge deres CLI(Command Line Interface), men brugte deres side til at forbinde til mit GitHub.</p>
+        <p>Siden bliver nu automatisk opdateret hver gang jeg pusher en ny version.</p>
+        <img src="/static/img/heroku_node.png">
+        <hr>
+        <h3>Joi(ikke implementere på siden)</h3>
+
+
     </div>
-    
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>

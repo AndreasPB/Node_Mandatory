@@ -16,12 +16,32 @@
     <div class="container">
         <div id="header">
             <!-- Navbar -->
+            <nav id="navbar" class="navbar navbar-expand-lg navbar-light bg-light">
+                <a class="navbar-brand" href="#">Mandatory</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                    <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/api">API</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/setup">Setup</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="/extra">Extra</a>
+                  </li>  
+                </ul>
+            </nav>
         </div>
             
         <h1>API</h1>
         <p>
-            Min API side tager brug af AJAX og jQuery. 
-            Ud over det bruger jeg en JSON, der ligger på <a href ="/api/data">/api/data</a>  
+            Min API side tager brug af AJAX, jQuery og en JSON der ligger på <a href ="/api/data">/api/data</a>  
         </p>
         <p>
             Vælg et antal kolonner og søg
@@ -61,18 +81,16 @@
                 <pre id="prettyNode" class="prettyprint lang-js linenums">
 // API
 app.get("/api", (req, res) => {
-    return res.sendFile(__dirname + '/api.html');
+    return res.sendFile(__dirname + '/static/html/api.html');
 });
-let apiObject = require('./data.json');
-// Get
+
 app.get('/api/data', (req, res) => {
-    res.send(apiObject);
+    res.sendFile(__dirname + '/static/json/data.json');
 });</pre>
 
                 <p>Node/Express gør os i stand til hurtigt at opsætte en side.</p>
                 <p>Li 2-3: Node bliver brugt til at binde html-filen til "/api".</p>
-                <p>Li 5:   Min JSON-fil bliver lagt over i et JS objekt.</p>
-                <p>Li 7-8: JS objektet bliver bundet til adressen "/api/data".</p>
+                <p>Li 6-7: Min JSON bliver sendt til adressen "/api/data".</p>
             </div>
         </div>
 
@@ -116,8 +134,8 @@ $.ajax({
     } 
 })</pre>
 
-                <p>Ajax lavet en Get-request og bruger jQuery til at løbe alle elementerne igennem og danne HTML-kode</p>
-                <p>Koden bliver appended til tabellens tbody indtil tællerneren rammer tableColumns</p>
+                <p>Ajax lavet en Get-request og bruger jQuery til at løbe alle elementerne igennem og danne HTML-kode.</p>
+                <p>Koden bliver appended til tabellens tbody indtil tællerneren rammer tableColumns.</p>
             </div>
             
         </div>
@@ -128,7 +146,7 @@ $.ajax({
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
-    <script src="static/script.js"></script>
+    <script src="static/js/script.js"></script>
     <script>
         $(document).ready( () => {
             //$('#prettyjQuery').load('/static/code_examples/jQueryCode.js');
