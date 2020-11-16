@@ -1,4 +1,4 @@
 # Node_Mandatory
- Obligatorisk aflevering - 4. semester node.js
+ Første obligatoriske aflevering - 4. semester Node.js
  
  [Hostet med Heroku](https://nodejsdocu.herokuapp.com/)
